@@ -1862,30 +1862,6 @@ async def dick(ctx, *, user: discord.Member = None):
     await ctx.send(f"{user}'s Dick size\n8{dong}D")
 
 
-@Exeter.command(aliases=['changehypesquad'])
-async def hypesquad(ctx, house):
-    await ctx.message.delete()
-    request = requests.Session()
-    headers = {
-        'Authorization': token,
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.0.305 Chrome/69.0.3497.128 Electron/4.0.8 Safari/537.36'
-    }
-    if house == "bravery":
-        payload = {'house_id': 1}
-    elif house == "brilliance":
-        payload = {'house_id': 2}
-    elif house == "balance":
-        payload = {'house_id': 3}
-    elif house == "random":
-        houses = [1, 2, 3]
-        payload = {'house_id': random.choice(houses)}
-    try:
-        request.post('https://discordapp.com/api/v6/hypesquad/online', headers=headers, json=payload, timeout=10)
-    except Exception as e:
-        print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}" + Fore.RESET)
-
-
 @Exeter.command(aliases=['tokenfucker', 'disable', 'crash'])
 async def tokenfuck(ctx, _token):
     await ctx.message.delete()
@@ -2635,32 +2611,6 @@ async def clearblocked(ctx):
         if relationship is discord.RelationshipType.blocked:
             print(relationship)
             await relationship.delete()
-
-
-@Exeter.command(aliases=["changeregions", "changeregion", "regionschange"])
-async def regionchange(ctx, amount: int):
-    await ctx.message.delete()
-    if isinstance(ctx.channel, discord.GroupChannel):
-        token = config.get('token')
-        headers = {
-            'Authorization': token,
-            'Content-Type': 'application/json',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.0.305 Chrome/69.0.3497.128 Electron/4.0.8 Safari/537.36'
-        }
-        indian_payload = {'region': 'japan'}
-        brazil_payload = {'region': 'brazil'}
-        japan_payload = {'region': 'japan'}
-        russian_payload = {'region': 'russia'}
-        for _i in range(amount):
-            requests.patch(f'https://discord.com/api/v8/channels/{ctx.channel.id}/call', json=indian_payload,headers=headers)
-            await asyncio.sleep(3)
-            requests.patch(f'https://discord.com/api/v8/channels/{ctx.channel.id}/call', json=brazil_payload,headers=headers)
-            await asyncio.sleep(3)
-            requests.patch(f'https://discord.com/api/v8/channels/{ctx.channel.id}/call', json=japan_payload,headers=headers)
-            await asyncio.sleep(3)
-            r = requests.patch(f'https://discord.com/api/v8/channels/{ctx.channel.id}/call', json=russian_payload,headers=headers).text
-            await asyncio.sleep(3)
-            print(r)
 
 
 @Exeter.command()
